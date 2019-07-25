@@ -6,6 +6,20 @@ class Post < ActiveRecord::Base
 
   #put new code here
 
+  #Here we are adding an author filter. The controller will now be able to ask for 
+  #posts by_author instead of querying the database itself. 
+  def self.by_author(author_id)
+    where(author: author_id)
+  end
+
+  def self.from_today
+    where("created_at >=?", Time.zone.today.beginning_of_day)
+  end
+   
+  def self.old_news
+    where("created_at <?", Time.zone.today.beginning_of_day)
+  end
+
   private
 
   def is_title_case

@@ -1,4 +1,14 @@
 <h1>Believe It Or Not I'm Blogging On Air</h1>
+<!-- The following lines of code in the following div will add a select control 
+with our authors in it and a button that says "Filter" -->
+<div>
+  <h3>Filter posts:</h3>
+  <%= form_tag("/posts", method: "get") do %>
+    <%= select_tag "author", options_from_collection_for_select(@authors, "id", "name"), include_blank: true %>
+    <%= select_tag "date", options_for_select(["Today", "Old News"]), include_blank: true %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
 <% @posts.each do |post| %>
   <div>
     <h2><%= post.title %></h2>
